@@ -7,6 +7,7 @@ var particles = [];
 var plinkos = [];
 var divisions = [];
 var ground;
+var particle;
 
 var divisionHeight=300;
 var score =0;
@@ -16,9 +17,7 @@ function setup() {
   world = engine.world;
   ground = new Ground(width/2,height,width,20);
   
-  particles = new Particle();
-
-  plinkos = new Plinko();
+  
 
    for (var k = 0; k <=width; k = k + 80) {
      divisions.push(new Divisions(k, height-divisionHeight/2, 10, divisionHeight));
@@ -115,4 +114,11 @@ function draw() {
    }
 
    
+}
+
+function mousePressed() {
+  if(gameState!=="end"){
+    count++;
+    particle = Particle(mouseX, 10,10, 10)
+  }
 }
