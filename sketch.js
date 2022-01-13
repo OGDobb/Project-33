@@ -9,8 +9,14 @@ var divisions = [];
 var ground;
 var particle;
 
+var gameState;
+
+var turn;
+
 var divisionHeight=300;
-var score =0;
+var score=0;
+var count=0;
+
 function setup() {
   createCanvas(800, 800);
   engine = Engine.create();
@@ -58,14 +64,15 @@ function setup() {
 function draw() {
   background("black");
   textSize(20)
+  mousePressed();
  text("Score : "+score,20,30);
   Engine.update(engine);
 
 
     if(particle!=null){
       particle.display();
-      if(particle.position.y>760){
-        if(particle.position.x<300){
+      if(particle.y>760&&particle.position.x<300){
+        
           score=score+500;
           particle=null;
           if(count>=5)gameState+"end";
@@ -99,10 +106,10 @@ function draw() {
      plinkos[i].display();
      
    }
-   if(frameCount%60===0){
-     particles.push(new Particle(random(width/2-30, width/2+30), 10,10));
-     score++;
-   }
+  //  if(frameCount%60===0){
+  //    particles.push(new Particle(random(width/2-30, width/2+30), 10,10));
+  //    score++;
+  //  }
  
   for (var j = 0; j < particles.length; j++) {
    
@@ -114,11 +121,11 @@ function draw() {
    }
 
    
-}
+
 
 function mousePressed() {
   if(gameState!=="end"){
+    particle = new Particle(mouseX, 10,10, 10);
     count++;
-    particle = Particle(mouseX, 10,10, 10)
   }
 }
